@@ -3,7 +3,6 @@ package core.taskables;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import core.ImageGenerator;
 import main.Debuglog;
 
 public class BurningShip extends TileTaskable {
@@ -12,19 +11,20 @@ public class BurningShip extends TileTaskable {
 
     @Override
     public BufferedImage doTile(Point id, double pixelwidth) {
-        ImageGenerator img = new ImageGenerator(100, 100);
-        for (double x = (id.x * 100) * pixelwidth; x < ((id.x + 1) * 100) * pixelwidth; x += pixelwidth) {
-            for (double y = (id.y * 100) * pixelwidth; y < ((id.y + 1) * 100) * pixelwidth; y += pixelwidth) {
-                int temp = algo(x, y);
+        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < 100; x++) {
+            for (int y = 0; y < 100; y++) {
+                int temp = algo((id.x * 100 + x) * pixelwidth, (id.y * 100 + y) * pixelwidth);
                 if (temp == -1) {
-                    img.add_pixel_int(0);
+                    img.setRGB(x, y, 0);
                 } else {
-                    img.add_pixel_int((int) (temp * 5) + 100);
+                    img.setRGB(x, y, (int) (temp * 5) + 100);
                 }
             }
         }
+
         Debuglog.log("Job Done: " + id, 2);
-        return img.getImage();
+        return img;
     }
 
     public int algo(double x, double y) {
