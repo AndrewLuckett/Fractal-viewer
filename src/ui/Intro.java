@@ -58,7 +58,7 @@ public class Intro extends Content {
 
         public void actionPerformed(ActionEvent e) {
             setComponentZOrder(fractalPane, 1);
-            setComponentZOrder(tooltip, 0);
+            // setComponentZOrder(tooltip, 0);
         }
     };
 

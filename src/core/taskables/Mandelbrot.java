@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import main.Debuglog;
 
-public class Mandelbrot extends TileTaskable {
+public class Mandelbrot implements TileTaskable {
     private int cutoff = 2000;
 
     @Override

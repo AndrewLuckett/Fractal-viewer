@@ -3,7 +3,7 @@ package core.taskables;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-public abstract class TileTaskable {
-    public abstract BufferedImage doTile(Point id, double pixelwidth);
+public interface TileTaskable {
+    public BufferedImage doTile(Point id, double pixelwidth);
 
 }

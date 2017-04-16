@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import main.Debuglog;
 
-public class BurningShip extends TileTaskable {
+public class BurningShip implements TileTaskable {
 
     private int cutoff = 2000;
 
