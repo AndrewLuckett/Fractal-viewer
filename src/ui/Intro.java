@@ -10,18 +10,24 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import core.taskables.Mandelbrot;
 import window.Content;
 
 public class Intro extends Content {
     static final long serialVersionUID = 0;
+
     private JPanel blackbar = new JPanel();
     private Fractal fractalPane = new Fractal(Mandelbrot.class, new Point2D.Double(0, 0), new Point2D.Double(4, 4));
     private JButton skipBtn = new JButton("Skip");
+    private Tooltip tooltip;
+
+    private Timer timer;
 
     @Override
     protected void create() {
+
         windowFrame.setMinimumSize(new Dimension(960, 560));
         setLayout(null);
         addComponentListener(new resizeListener());
@@ -37,6 +43,9 @@ public class Intro extends Content {
             }
         });
 
+        timer = new Timer(200, updater);
+        timer.start();
+
         add(fractalPane);
         add(blackbar);
 
@@ -44,6 +53,14 @@ public class Intro extends Content {
         setComponentZOrder(blackbar, 0);
 
     }
+
+    ActionListener updater = new ActionListener() {
+
+        public void actionPerformed(ActionEvent e) {
+            setComponentZOrder(fractalPane, 1);
+            setComponentZOrder(tooltip, 0);
+        }
+    };
 
     public void done() {
         windowFrame.setMinimumSize(null);
