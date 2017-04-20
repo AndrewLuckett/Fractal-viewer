@@ -28,7 +28,7 @@ public class Fractal extends JPanel implements MouseListener, MouseMotionListene
     private Timer timer;
 
     public Fractal(Class<? extends TileTaskable> task, Point2D startCentre, Point2D startBounds) {
-        setBackground(Color.BLUE); // debug?
+        setBackground(Color.GRAY); // debug?
         setLayout(null);
         this.addComponentListener(new resizeListener());
         this.addMouseListener(this);
@@ -48,12 +48,14 @@ public class Fractal extends JPanel implements MouseListener, MouseMotionListene
         }
     };
 
+    public void gotoloc(Point2D startCentre, Point2D startBounds) {
+        tiles.gotoloc(startCentre, startBounds);
+    }
+
     // * Listeners
     class resizeListener extends ComponentAdapter {
         public void componentResized(ComponentEvent e) {
             tiles.windowResized(new Point(getWidth(), getHeight()));
-            repaint();
-            revalidate();
         }
     }
 

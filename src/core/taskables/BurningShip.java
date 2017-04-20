@@ -3,11 +3,12 @@ package core.taskables;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+import core.FractalData;
 import main.Debuglog;
 
 public class BurningShip implements TileTaskable {
 
-    private int cutoff = 2000;
+    int cutoff = FractalData.cutoff;
 
     @Override
     public BufferedImage doTile(Point id, double pixelwidth) {

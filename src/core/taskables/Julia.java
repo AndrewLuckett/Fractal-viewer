@@ -1,20 +1,23 @@
 package core.taskables;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 import core.FractalData;
 import main.Debuglog;
 
-public class Mandelbrot implements TileTaskable {
+public class Julia implements TileTaskable {
+
     int cutoff = FractalData.cutoff;
+    Point2D.Double coords = FractalData.coords;
 
     @Override
     public BufferedImage doTile(Point id, double pixelwidth) {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x < 100; x++) {
             for (int y = 0; y < 100; y++) {
-                int temp = algo((id.x * 100 + x) * pixelwidth, (id.y * 100 + y) * pixelwidth, 0, 0);
+                int temp = algo(coords.getX(), coords.getY(), (id.x * 100 + x) * pixelwidth, (id.y * 100 + y) * pixelwidth);
                 if (temp == -1) {
                     img.setRGB(x, y, 0);
                 } else {

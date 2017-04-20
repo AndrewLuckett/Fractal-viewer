@@ -32,12 +32,24 @@ public class Tiles {
         this.drawsurface = drawsurface;
     }
 
+    public void gotoloc(Point2D startCentre, Point2D startBounds) {
+        this.startBounds = startBounds;
+        this.startCentre = startCentre;
+        sized = false;
+
+        tiledata.forEach((id, tile) -> {
+            removeTile(tile);
+        });
+        tiledata.clear();
+        windowResized(new Point(drawsurface.getWidth(), drawsurface.getHeight()));
+    }
+
     public void fixedupdate() {
         List<Point> remove = new ArrayList<Point>();
         taskInterface.tasks.forEach((id, img) -> {
             if (tiledata.containsKey(id)) {
                 if (img.isDone()) {
-                    Debuglog.log("Tile done", 4);
+                    Debuglog.log("Tile done", 1);
                     remove.add(id);
                     try {
                         tiledata.get(id).fill(img.get());
@@ -46,6 +58,7 @@ public class Tiles {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
+
                 }
             } else {
                 remove.add(id);
@@ -89,8 +102,20 @@ public class Tiles {
     }
 
     public void zoom(Boolean dir) {
-
+        Point2D.Double realcentre = new Point2D.Double(centre.getX() * pixelwidth, centre.getY() * pixelwidth);
+        if (dir) {
+            pixelwidth *= 1.25;
+        } else {
+            pixelwidth /= 1.25;
+        }
+        centre.setLocation(realcentre.getX() / pixelwidth, realcentre.getY() / pixelwidth);
+        tiledata.forEach((id, tile) -> {
+            removeTile(tile);
+        });
+        tiledata.clear();
         checkAll();
+        move(new Point());
+
     }
 
     private void newTile(Point id) {
@@ -100,6 +125,10 @@ public class Tiles {
         drawsurface.add(newtile);
         newtile.setSize(100, 100);
         taskInterface.addJob(id, pixelwidth);
+    }
+
+    private void removeTile(Tile tile) {
+        drawsurface.remove(tile);
     }
 
     public void move(Point dist) {
