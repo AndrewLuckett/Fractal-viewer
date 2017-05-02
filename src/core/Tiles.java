@@ -30,6 +30,7 @@ public class Tiles {
         this.startCentre = startCentre;
         taskInterface = new JobTasker(task);
         this.drawsurface = drawsurface;
+
     }
 
     public void gotoloc(Point2D startCentre, Point2D startBounds) {
@@ -119,7 +120,7 @@ public class Tiles {
     }
 
     private void newTile(Point id) {
-        Debuglog.log("New tile: " + id, 5);
+        Debuglog.log("New tile: " + id, 4);
         Tile newtile = new Tile();
         tiledata.put(id, newtile);
         drawsurface.add(newtile);

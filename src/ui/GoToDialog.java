@@ -34,6 +34,11 @@ public class GoToDialog extends Content {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        centrex.setText("0");
+        centrey.setText("0");
+        width.setText("2");
+        height.setText("2");
+
         newrow("Centre X", centrex);
         newrow("Centre Y", centrey);
         newrow("Width", width);
