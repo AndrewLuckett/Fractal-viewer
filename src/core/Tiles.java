@@ -42,6 +42,11 @@ public class Tiles {
             removeTile(tile);
         });
         tiledata.clear();
+        taskInterface.tasks.forEach((id, tile) -> {
+            tile.cancel(true);
+        });
+        taskInterface.tasks.clear();
+
         windowResized(new Point(drawsurface.getWidth(), drawsurface.getHeight()));
     }
 
@@ -114,6 +119,10 @@ public class Tiles {
             removeTile(tile);
         });
         tiledata.clear();
+        taskInterface.tasks.forEach((id, tile) -> {
+            tile.cancel(true);
+        });
+        taskInterface.tasks.clear();
         checkAll();
         move(new Point());
 
