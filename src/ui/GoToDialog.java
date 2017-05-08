@@ -79,7 +79,7 @@ public class GoToDialog extends Content {
                 }
 
                 if (valid) {
-                    pane.gotoloc(new Point2D.Double(x, y), new Point2D.Double(widthval, heightval));
+                    pane.gotoloc(new Point2D.Double(-x, -y), new Point2D.Double(widthval, heightval));
                     // windowFrame.dispose();
                 }
             }
