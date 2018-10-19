@@ -76,6 +76,7 @@ public class Home extends Content {
                 remove(fractalPane);
                 fractalPane = new Fractal(Mandelbrot.class, new Point2D.Double(0, 0), new Point2D.Double(4, 4));
                 add(fractalPane);
+                resizeAll();
                 enableallbuttons();
                 mandelbrot.setEnabled(false);
             }
@@ -95,6 +96,7 @@ public class Home extends Content {
                 remove(fractalPane);
                 fractalPane = new Fractal(BurningShip.class, new Point2D.Double(0, 0), new Point2D.Double(4, 4));
                 add(fractalPane);
+                resizeAll();
                 enableallbuttons();
                 burningship.setEnabled(false);
             }
@@ -177,13 +179,18 @@ public class Home extends Content {
         remove(fractalPane);
         fractalPane = new Fractal(Julia.class, new Point2D.Double(0, 0), new Point2D.Double(4, 4));
         add(fractalPane);
+        resizeAll();
+    }
+
+    public void resizeAll() {
+        fractalPane.setSize(getWidth(), getHeight() - 35);
+        blackbar.setLocation(0, getHeight() - 35);
+        blackbar.setSize(getWidth(), 35);
     }
 
     class resizeListener extends ComponentAdapter {
         public void componentResized(ComponentEvent e) {
-            fractalPane.setSize(getWidth(), getHeight() - 35);
-            blackbar.setLocation(0, getHeight() - 35);
-            blackbar.setSize(getWidth(), 35);
+            resizeAll();
         }
     }
 
