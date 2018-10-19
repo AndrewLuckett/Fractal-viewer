@@ -36,8 +36,8 @@ public class GoToDialog extends Content {
 
         centrex.setText("0");
         centrey.setText("0");
-        width.setText("2");
-        height.setText("2");
+        width.setText("4");
+        height.setText("4");
 
         newrow("Centre X", centrex);
         newrow("Centre Y", centrey);
